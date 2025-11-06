@@ -1,20 +1,21 @@
+using CarWash.Application;
+using CarWash.Infrastructure;
 using CarWash.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Обязательные сервисы
-builder.Services.AddControllers();           // ← для контроллеров
+builder.Services.AddControllers();
 builder.Services.AddAuthorization();
-
-// В Program.cs
-builder.Services.AddApplicationServices();      // ← из CarWash.Application
-builder.Services.AddInfrastructureServices(builder.Configuration); // ← из CarWash.Infrastructure
-
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Регистрация сервисов из Application и Infrastructure
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // База данных
 builder.Services.AddDbContext<CarWashDbContext>(options =>
@@ -31,5 +32,4 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers(); // ← обязательно!
-
 app.Run();
