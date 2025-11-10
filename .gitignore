@@ -1,13 +1,13 @@
-cat > .gitignore << EOF
 # .NET Core
 bin/
 obj/
-
 # Visual Studio
 .vs/
 .vscode/
-
-# Build results
+# Secrets
+appsettings.Development.json
+appsettings.Production.json
+# Build
 [Dd]ebug/
 [Rr]elease/
 x64/
@@ -16,21 +16,10 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
-
 # NuGet
 *.nupkg
 *.nuget.props
 *.nuget.targets
-
-# User-specific files
+# User files
 *.user
-*.userosscache
 *.suo
-*.userprefs
-
-# Logs and temp files
-logs/
-temp/
-*.log
-*.tmp
-EOF
