@@ -11,5 +11,12 @@ public class CarWashDbContext : DbContext
     public DbSet<Car> Cars => Set<Car>();
     public DbSet<Service> Services => Set<Service>();
     public DbSet<Order> Orders => Set<Order>();
-    public DbSet<OrderService> OrderServices => Set<OrderService>(); // ← обязательно!
+    public DbSet<OrderService> OrderServices => Set<OrderService>(); 
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CarWashDbContext).Assembly);
+        
+        base.OnModelCreating(modelBuilder);
+    }
 }
