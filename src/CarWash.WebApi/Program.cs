@@ -1,10 +1,14 @@
 using CarWash.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using CarWash.Infrastructure;
+using CarWash.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
+builder.Services.AddInfrastructureServices(builder.Configuration);
+builder.Services.AddApplicationServices();
 
 if (builder.Environment.IsDevelopment())
 {
