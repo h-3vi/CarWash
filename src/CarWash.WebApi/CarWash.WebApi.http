@@ -3,4 +3,4 @@
 GET {{CarWash.WebApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
-###
+

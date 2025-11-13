@@ -7,6 +7,7 @@ obj/
 # Secrets
 appsettings.Development.json
 appsettings.Production.json
+appsettings.json
 # Build
 [Dd]ebug/
 [Rr]elease/
