@@ -11,9 +11,14 @@ public class Service
 
     public Service(string name, string description, decimal price)
     {
+        if (string.IsNullOrWhiteSpace(name))
+            throw new ArgumentException("Название услуги не может быть пустым", nameof(name));
+        if (price < 0)
+            throw new ArgumentException("Цена не может быть отрицательной", nameof(price));
+
         Id = Guid.NewGuid();
-        Name = name;
-        Description = description;
+        Name = name.Trim();
+        Description = description ?? string.Empty;
         Price = price;
     }
 }

@@ -46,4 +46,5 @@ public class Order
 
     public void SetTotalAmount(decimal amount) => TotalAmount = amount;
     public void SetStatus(OrderStatus status) => Status = status;
+    public IEnumerable<Guid> GetServiceIds() => _orderServices.Select(os => os.ServiceId);
 }
