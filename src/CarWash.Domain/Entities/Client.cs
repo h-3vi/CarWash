@@ -1,3 +1,5 @@
+using System.Collections.ObjectModel;
+
 namespace CarWash.Domain.Entities;
 
 public class Client
@@ -9,15 +11,20 @@ public class Client
     private readonly List<Order> _orders = new();
     public IReadOnlyCollection<Order> Orders => _orders.AsReadOnly();
 
-    private Client() { } 
+    private Client() { }
 
     public Client(string fullName, string phoneNumber)
     {
-        Id = Guid.NewGuid();
-        FullName = fullName;
-        PhoneNumber = phoneNumber;
-    }
+        if (fullName == null || string.IsNullOrWhiteSpace(fullName))
+            throw new ArgumentException("ФИО клиента не может быть пустым", nameof(fullName));
 
+        if (phoneNumber == null || string.IsNullOrWhiteSpace(phoneNumber))
+            throw new ArgumentException("Телефон клиента не может быть пустым", nameof(phoneNumber));
+
+        Id = Guid.NewGuid();
+        FullName = fullName.Trim();
+        PhoneNumber = phoneNumber.Trim();
+    }
     public void AddOrder(Order order)
     {
         _orders.Add(order);
