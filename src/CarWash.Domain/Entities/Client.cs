@@ -15,21 +15,16 @@ public class Client
 
     public Client(string fullName, string phoneNumber)
     {
-        if (fullName == null)
-            throw new ArgumentNullException(nameof(fullName), "ФИО клиента не может быть null");
-        if (phoneNumber == null)
-            throw new ArgumentNullException(nameof(phoneNumber), "Телефон клиента не может быть null");
-
-        if (string.IsNullOrWhiteSpace(fullName))
+        if (fullName == null || string.IsNullOrWhiteSpace(fullName))
             throw new ArgumentException("ФИО клиента не может быть пустым", nameof(fullName));
-        if (string.IsNullOrWhiteSpace(phoneNumber))
+
+        if (phoneNumber == null || string.IsNullOrWhiteSpace(phoneNumber))
             throw new ArgumentException("Телефон клиента не может быть пустым", nameof(phoneNumber));
 
         Id = Guid.NewGuid();
         FullName = fullName.Trim();
         PhoneNumber = phoneNumber.Trim();
     }
-
     public void AddOrder(Order order)
     {
         _orders.Add(order);

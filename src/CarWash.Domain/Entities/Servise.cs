@@ -8,17 +8,20 @@ public class Service
     public decimal Price { get; private set; }
 
     private Service() { } 
-
-    public Service(string name, string description, decimal price)
+   public Service(string name, string description, decimal price)
     {
-        if (string.IsNullOrWhiteSpace(name))
+        if (name == null || string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Название услуги не может быть пустым", nameof(name));
+
+        if (description == null)
+            throw new ArgumentException(nameof(description));
+
         if (price < 0)
             throw new ArgumentException("Цена не может быть отрицательной", nameof(price));
 
         Id = Guid.NewGuid();
         Name = name.Trim();
-        Description = description ?? string.Empty;
+        Description = description.Trim();
         Price = price;
     }
 }

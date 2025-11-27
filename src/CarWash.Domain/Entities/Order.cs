@@ -35,16 +35,22 @@ public class Order
         Status = status;
         TotalAmount = 0;
     }
-
     public void AddService(Guid serviceId)
     {
+        if (serviceId == Guid.Empty)
+            throw new ArgumentException("ID услуги не может быть пустым", nameof(serviceId));
         if (!_orderServices.Any(os => os.ServiceId == serviceId))
         {
             _orderServices.Add(new OrderService { OrderId = Id, ServiceId = serviceId });
         }
     }
 
-    public void SetTotalAmount(decimal amount) => TotalAmount = amount;
+    public void SetTotalAmount(decimal amount)
+    {
+        if (amount < 0)
+            throw new ArgumentException("Сумма не может быть отрицательной", nameof(amount));
+        TotalAmount = amount;
+    }
     public void SetStatus(OrderStatus status) => Status = status;
     public IEnumerable<Guid> GetServiceIds() => _orderServices.Select(os => os.ServiceId);
 }

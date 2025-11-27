@@ -54,4 +54,18 @@ public class OrderTests
         order.SetStatus(OrderStatus.Completed);
         Assert.Equal(OrderStatus.Completed, order.Status);
     }
+
+    [Fact]
+    public void AddService_Throws_WhenServiceIdIsEmpty()
+    {
+        var order = new Order(Guid.NewGuid(), Guid.NewGuid(), DateTime.UtcNow);
+        Assert.Throws<ArgumentException>(() => order.AddService(Guid.Empty));
+    }
+
+    [Fact]
+    public void SetTotalAmount_Throws_WhenAmountIsNegative()
+    {
+        var order = new Order(Guid.NewGuid(), Guid.NewGuid(), DateTime.UtcNow);
+        Assert.Throws<ArgumentException>(() => order.SetTotalAmount(-100m));
+    }
 }

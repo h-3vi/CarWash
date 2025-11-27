@@ -18,12 +18,40 @@ public class CarTests
         Assert.NotEqual(Guid.Empty, car.Id);
     }
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    public void Constructor_Throws_WhenBrandIsInvalid(string? brand) 
+    [Fact]
+    public void Constructor_Throws_WhenBrandIsNull()
     {
-        Assert.Throws<ArgumentException>(() => new Car(brand!, "Camry", "А123БВ777", Guid.NewGuid()));
+        Assert.Throws<ArgumentException>(() => new Car(null!, "Camry", "А123БВ777", Guid.NewGuid()));
+    }
+
+    [Fact]
+    public void Constructor_Throws_WhenBrandIsEmpty()
+    {
+        Assert.Throws<ArgumentException>(() => new Car("", "Camry", "А123БВ777", Guid.NewGuid()));
+    }
+
+    [Fact]
+    public void Constructor_Throws_WhenModelIsNull()
+    {
+        Assert.Throws<ArgumentException>(() => new Car("Toyota", null!, "А123БВ777", Guid.NewGuid()));
+    }
+
+    [Fact]
+    public void Constructor_Throws_WhenModelIsEmpty()
+    {
+        Assert.Throws<ArgumentException>(() => new Car("Toyota", "", "А123БВ777", Guid.NewGuid()));
+    }
+
+    [Fact]
+    public void Constructor_Throws_WhenLicensePlateIsNull()
+    {
+        Assert.Throws<ArgumentException>(() => new Car("Toyota", "Camry", null!, Guid.NewGuid()));
+    }
+
+    [Fact]
+    public void Constructor_Throws_WhenLicensePlateIsEmpty()
+    {
+        Assert.Throws<ArgumentException>(() => new Car("Toyota", "Camry", "", Guid.NewGuid()));
     }
 
     [Fact]
